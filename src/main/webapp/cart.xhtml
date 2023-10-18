@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <div class="card">
+        <h:form>
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="Home" icon="pi pi-fw pi-home" action="index" />
+
+                <p:menuitem value="My Cart" icon="pi pi-fw pi-shopping-cart" action="#{cartBean.goToCart(param['userId'])}" />
+            </p:menubar>
+
+            <ui:repeat value="#{cartBean.findByUserId(param['userId'])}" var="cart">
+                <h3>Total: #{cart.total}</h3>
+                <ui:repeat value="#{cart.products}" var="product">
+                    <div class="product-item">
+                        <div class="product-item-content">
+                            <div>
+                                <h4 class="mb-1">#{product.name}</h4>
+                                <h6 class="mt-0 mb-3">
+                                    <h:outputText value="#{product.price}"/>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </ui:repeat>
+        </h:form>
+    </div>
+</h:body>
+</html>
+
